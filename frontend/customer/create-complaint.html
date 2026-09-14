@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File a Complaint - ResolverAI</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/customer/dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="/frontend/customer/create-complaint.html" class="nav-link active"><i class="fas fa-plus-circle"></i> File Complaint</a></li>
+            <li><a href="/frontend/customer/complaints.html" class="nav-link"><i class="fas fa-list-ul"></i> My Tickets</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>Submit New Support Complaint</h1>
+                <p>Describe your issue below. Our AI engine will pre-classify and prioritize your request in real time.</p>
+            </div>
+        </div>
+
+        <div class="grid-2" style="grid-template-columns: 1.4fr 1fr;">
+            <!-- Complaint Submission Form -->
+            <div class="card">
+                <form id="createComplaintForm">
+                    <div class="form-group">
+                        <label class="form-label">Subject / Title</label>
+                        <input type="text" id="subjectInput" class="form-control" placeholder="e.g. Unauthorized $49.99 charge on credit card" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Category (AI Auto-Selected or Override)</label>
+                        <select id="categorySelect" class="form-select">
+                            <option value="Billing">Billing & Subscription</option>
+                            <option value="Technical">Technical Bug / API Error</option>
+                            <option value="Delivery">Delivery & Logistics</option>
+                            <option value="Service">General Customer Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Detailed Description</label>
+                        <textarea id="descriptionInput" class="form-control" style="min-height: 180px;" placeholder="Please provide all relevant details (order IDs, error codes, dates, transaction amounts)..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-full" style="margin-top: 1rem;">
+                        <i class="fas fa-paper-plane"></i> Submit Ticket to AI Queue
+                    </button>
+                </form>
+            </div>
+
+            <!-- Real-time AI Assistant Feedback Panel -->
+            <div>
+                <div class="ai-preview-card">
+                    <div class="ai-pulse-header">
+                        <div class="ai-pulse-dot"></div>
+                        <span>Real-Time AI Inspection</span>
+                    </div>
+
+                    <div class="ai-stat-row">
+                        <span class="text-muted">Predicted Category</span>
+                        <span id="aiCategoryBadge" class="badge" style="background: var(--bg-surface);">Analyzing...</span>
+                    </div>
+
+                    <div class="ai-stat-row">
+                        <span class="text-muted">Calculated Urgency</span>
+                        <span id="aiPriorityBadge" class="badge badge-low">--</span>
+                    </div>
+
+                    <div class="ai-stat-row">
+                        <span class="text-muted">Sentiment Score</span>
+                        <span id="aiSentimentBadge" class="sentiment-pill sentiment-neutral">--</span>
+                    </div>
+
+                    <div class="ai-solutions-box">
+                        <div class="ai-solutions-title">
+                            <i class="fas fa-lightbulb text-warning"></i> AI Instant Solution Preview
+                        </div>
+                        <ul id="aiSolutionsList" style="list-style: none;">
+                            <li class="ai-solution-item">Start typing your complaint description to see live AI predictions and troubleshooting steps.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Customer Portal</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/complain.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('customer');
+        });
+    </script>
+</body>
+</html>

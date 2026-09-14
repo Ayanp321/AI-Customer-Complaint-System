@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payout Receipt - ResolverAI</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI Payout Portal</span>
+        </a>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container" style="max-width: 580px; padding-top: 3rem;">
+        <div class="card" style="text-align: center; border-top: 4px solid var(--success);">
+            <div style="width: 72px; height: 72px; background: rgba(16, 185, 129, 0.15); border-radius: 50%; color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 1.5rem auto;">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h1 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem;">Compensation Refund Disbursed!</h1>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Your refund transaction has been completed successfully and credited to your card.</p>
+
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; text-align: left; margin-bottom: 2rem;">
+                <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text-muted); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Transaction Receipt</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;">
+                    <div class="flex-between">
+                        <span class="text-muted">Transaction ID:</span>
+                        <strong id="statusTxnId" style="font-family: monospace; color: var(--primary);">TXN-XXXXXX</strong>
+                    </div>
+                    <div class="flex-between">
+                        <span class="text-muted">Associated Ticket:</span>
+                        <strong id="statusTicketId" class="ticket-id">TICK-XXXX</strong>
+                    </div>
+                    <div class="flex-between">
+                        <span class="text-muted">Amount Disbursed:</span>
+                        <strong id="statusAmount" style="color: var(--success); font-size: 1.2rem;">$0.00</strong>
+                    </div>
+                    <div class="flex-between">
+                        <span class="text-muted">Payout Method:</span>
+                        <span>Credit / Debit Card</span>
+                    </div>
+                    <div class="flex-between">
+                        <span class="text-muted">Timestamp:</span>
+                        <span id="statusTimestamp" class="text-subtle" style="font-size: 0.8rem;">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <a href="/frontend/customer/dashboard.html" class="btn btn-primary btn-full">
+                    Return to Customer Dashboard
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Secure Financial Payout Portal</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/payment.js"></script>
+</body>
+</html>

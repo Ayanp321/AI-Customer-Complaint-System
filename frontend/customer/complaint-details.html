@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details - ResolverAI</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/customer/dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="/frontend/customer/create-complaint.html" class="nav-link"><i class="fas fa-plus-circle"></i> File Complaint</a></li>
+            <li><a href="/frontend/customer/complaints.html" class="nav-link active"><i class="fas fa-list-ul"></i> My Tickets</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div style="margin-bottom: 1.5rem;">
+            <a href="/frontend/customer/complaints.html" class="btn btn-sm btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to My Tickets
+            </a>
+        </div>
+
+        <div class="ticket-detail-grid">
+            <!-- Left Side: Conversation Chat Stream -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span id="detailTicketId" class="ticket-id" style="font-size: 1.1rem;">TICK-XXXX</span>
+                        <h2 id="detailSubject" style="font-size: 1.25rem; font-weight: 700; margin-top: 0.25rem;">Complaint Subject</h2>
+                    </div>
+                    <span id="detailStatusBadge" class="badge badge-pending">Pending</span>
+                </div>
+
+                <!-- Chat Stream -->
+                <div id="chatMessagesContainer" class="chat-history">
+                    <!-- Rendered by customer.js -->
+                </div>
+
+                <!-- Reply Input -->
+                <form id="replyForm" style="display: flex; gap: 0.75rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <input type="text" id="replyTextInput" class="form-control" placeholder="Type a message to your support agent..." required>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side: Ticket Metadata & Resolution Payout Action Box -->
+            <div>
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 class="card-title" style="font-size: 1rem; margin-bottom: 1rem;"><i class="fas fa-info-circle text-primary"></i> Ticket Information</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem;">
+                        <div class="flex-between">
+                            <span class="text-muted">Category</span>
+                            <span id="detailCategory" class="badge" style="background: var(--bg-surface);">--</span>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">Priority</span>
+                            <span id="detailPriorityBadge" class="badge badge-medium">--</span>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">Logged On</span>
+                            <span id="detailCreatedAt" class="text-subtle" style="font-size: 0.8rem;">--</span>
+                        </div>
+                    </div>
+
+                    <div id="resolutionActionBox"></div>
+                </div>
+
+                <!-- Resolution Timeline -->
+                <div class="card">
+                    <h3 class="card-title" style="font-size: 1rem;"><i class="fas fa-stream text-primary"></i> Resolution Progression</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">Ticket Submitted</div>
+                            <div class="timeline-date">AI sentiment analyzed & priority assigned</div>
+                        </div>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">Assigned to Agent Queue</div>
+                            <div class="timeline-date">Reviewing system logs & transaction state</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">Resolution & Payout</div>
+                            <div class="timeline-date">Final verification & issue close</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Customer Portal</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/customer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('customer');
+        });
+    </script>
+</body>
+</html>

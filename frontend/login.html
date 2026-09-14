@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - AI Customer Complaint System</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="justify-content: center; align-items: center; min-height: 100vh;">
+    <div style="width: 100%; max-width: 440px; padding: 1.5rem;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="/frontend/index.html" class="nav-brand" style="justify-content: center; margin-bottom: 0.75rem;">
+                <div class="brand-logo"><i class="fas fa-brain"></i></div>
+                <span>ResolverAI</span>
+            </a>
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Welcome Back</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Sign in to access your portal</p>
+        </div>
+
+        <div class="card">
+            <div style="display: flex; gap: 0.5rem; background: var(--bg-surface); padding: 0.3rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                <button type="button" id="tabCustomer" class="btn btn-sm btn-primary" style="flex: 1;">
+                    <i class="fas fa-user"></i> Customer
+                </button>
+                <button type="button" id="tabAgent" class="btn btn-sm btn-secondary" style="flex: 1;">
+                    <i class="fas fa-headset"></i> Support Agent
+                </button>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="emailInput" class="form-control" placeholder="aarav.sharma@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="passwordInput" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 1rem;">
+                    Sign In <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Quick Demo Shortcuts:</p>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button type="button" id="btnQuickCustomer" class="btn btn-sm btn-secondary" style="flex: 1;">
+                        Demo Customer
+                    </button>
+                    <button type="button" id="btnQuickAgent" class="btn btn-sm btn-secondary" style="flex: 1;">
+                        Demo Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+            Don't have an account? <a href="/frontend/register.html">Create Customer Account</a>
+        </p>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let activeRole = 'customer';
+            const tabCustomer = document.getElementById('tabCustomer');
+            const tabAgent = document.getElementById('tabAgent');
+            const emailInput = document.getElementById('emailInput');
+            const passwordInput = document.getElementById('passwordInput');
+
+            tabCustomer.addEventListener('click', () => {
+                activeRole = 'customer';
+                tabCustomer.className = 'btn btn-sm btn-primary';
+                tabAgent.className = 'btn btn-sm btn-secondary';
+                emailInput.value = 'aarav.sharma@example.com';
+                passwordInput.value = 'password123';
+            });
+
+            tabAgent.addEventListener('click', () => {
+                activeRole = 'agent';
+                tabAgent.className = 'btn btn-sm btn-primary';
+                tabCustomer.className = 'btn btn-sm btn-secondary';
+                emailInput.value = 'agent@support.com';
+                passwordInput.value = 'adminpassword';
+            });
+
+            document.getElementById('btnQuickCustomer').addEventListener('click', () => {
+                tabCustomer.click();
+            });
+
+            document.getElementById('btnQuickAgent').addEventListener('click', () => {
+                tabAgent.click();
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const res = window.auth.login(emailInput.value.trim(), passwordInput.value.trim());
+                if (res.success) {
+                    if (res.user.role === 'agent') {
+                        window.location.href = '/frontend/agent/dashboard.html';
+                    } else {
+                        window.location.href = '/frontend/customer/dashboard.html';
+                    }
+                } else {
+                    alert(res.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
