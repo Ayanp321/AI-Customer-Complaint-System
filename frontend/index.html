@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Customer Complaint Resolution System</title>
+    <meta name="description" content="AI-powered customer complaint resolution system using NLP, ML classification, sentiment analysis, and automated refund workflows.">
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/frontend/customer/dashboard.html" class="nav-link"><i class="fas fa-user"></i> Customer Portal</a></li>
+            <li><a href="/frontend/agent/dashboard.html" class="nav-link"><i class="fas fa-headset"></i> Agent Center</a></li>
+            <li><a href="/frontend/login.html" class="btn btn-sm btn-primary">Sign In</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container" style="display: flex; flex-direction: column; gap: 4rem; padding-top: 3rem;">
+        <!-- Hero Section -->
+        <section style="text-align: center; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+            <div class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--primary); padding: 0.5rem 1rem; border-radius: 9999px;">
+                <i class="fas fa-sparkles"></i> AI & Machine Learning Powered Support
+            </div>
+            <h1 style="font-size: 3.2rem; font-weight: 800; line-height: 1.15; background: linear-gradient(135deg, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Intelligent Customer Complaint Resolution System
+            </h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 750px;">
+                Automatically categorize customer issues, analyze real-time sentiment, prioritize urgency, and empower support teams to resolve complaints 5x faster with AI-generated smart responses.
+            </p>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <a href="/frontend/customer/create-complaint.html" class="btn btn-lg btn-primary">
+                    <i class="fas fa-paper-plane"></i> File a Complaint (AI Assisted)
+                </a>
+                <a href="/frontend/agent/dashboard.html" class="btn btn-lg btn-secondary">
+                    <i class="fas fa-shield-alt"></i> Open Agent Workbench
+                </a>
+            </div>
+        </section>
+
+        <!-- Dynamic System Stats Bar -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="fas fa-bolt"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value">98.4%</span>
+                    <span class="stat-label">AI Classification Accuracy</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value">&lt; 15 mins</span>
+                    <span class="stat-label">Average Resolution SLA</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success"><i class="fas fa-smile"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value">4.9 / 5.0</span>
+                    <span class="stat-label">Customer Satisfaction</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon danger"><i class="fas fa-shield-check"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Refund Audit Compliance</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Capabilities -->
+        <section>
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="font-size: 2rem; font-weight: 700;">Engineered for High-Speed Resolution</h2>
+                <p style="color: var(--text-muted);">Combining NLP classification algorithms with instant billing payout integrations.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="stat-icon primary" style="margin-bottom: 1rem;"><i class="fas fa-robot"></i></div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Real-time AI Sentiment Analyzer</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Evaluates customer emotion, toxicity score, and urgency while the customer types, automatically flagging high-priority issues before submission.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="stat-icon warning" style="margin-bottom: 1rem;"><i class="fas fa-magic"></i></div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Smart Auto-Reply Workbench</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Generates context-aware, customized response drafts for support agents based on ticket category, history, and system logs with one click.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="stat-icon success" style="margin-bottom: 1rem;"><i class="fas fa-credit-card"></i></div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Instant Refund Payout Gateway</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Automated compensation payouts for billing disputes directly to customer cards with instant status verification receipts.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System. AI-powered Customer Complaint Management Platform.</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+</body>
+</html>

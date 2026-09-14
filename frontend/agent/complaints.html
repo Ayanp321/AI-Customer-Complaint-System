@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Queue - ResolverAI Admin</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI Admin</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/agent/dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Command Center</a></li>
+            <li><a href="/frontend/agent/complaints.html" class="nav-link active"><i class="fas fa-tasks"></i> Support Queue</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>Support Queue Management</h1>
+                <p>Filter complaints by AI priority, category, sentiment score, and agent assignment status.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- Filter Bar -->
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <div style="flex: 2; min-width: 220px;">
+                    <input type="text" id="agentSearchInput" class="form-control" placeholder="Search ticket ID, customer name, email, or keywords...">
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <select id="agentStatusFilter" class="form-select">
+                        <option value="All">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <select id="agentPriorityFilter" class="form-select">
+                        <option value="All">All Priorities</option>
+                        <option value="High">High Urgency</option>
+                        <option value="Medium">Medium Urgency</option>
+                        <option value="Low">Low Urgency</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <select id="agentCategoryFilter" class="form-select">
+                        <option value="All">All Categories</option>
+                        <option value="Billing">Billing</option>
+                        <option value="Technical">Technical</option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="Service">Service</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Queue Table -->
+            <div class="table-container">
+                <table class="complaint-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Customer</th>
+                            <th>Subject</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Sentiment</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agentFullQueueTable">
+                        <!-- Loaded dynamically via agent.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Support Agent Workbench</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/agent.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('agent');
+        });
+    </script>
+</body>
+</html>

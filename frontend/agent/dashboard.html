@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Command Center - ResolverAI</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI Admin</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/agent/dashboard.html" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Command Center</a></li>
+            <li><a href="/frontend/agent/complaints.html" class="nav-link"><i class="fas fa-tasks"></i> Support Queue</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>Support Agent Command Center</h1>
+                <p>Monitor SLA compliance, high-risk sentiment alerts, and AI ticket triage queue.</p>
+            </div>
+            <a href="/frontend/agent/complaints.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-list-ol"></i> Manage Queue
+            </a>
+        </div>
+
+        <!-- Metric Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon warning"><i class="fas fa-inbox"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statUnassigned">0</span>
+                    <span class="stat-label">Unassigned / Pending</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon danger"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statHighPriority">0</span>
+                    <span class="stat-label">High Priority / Urgent</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success"><i class="fas fa-check-double"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statAgentResolved">0</span>
+                    <span class="stat-label">Resolved Tickets</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="fas fa-heartbeat"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statAvgSentiment">--</span>
+                    <span class="stat-label">Customer Sentiment Index</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category & SLA Distribution -->
+        <div class="grid-2" style="margin-bottom: 2rem;">
+            <!-- Category Volume Breakdown -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-chart-pie text-primary"></i> Category Volume Breakdown</h3>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 75%; background: var(--primary);"></div>
+                        <span class="chart-bar-label">Billing</span>
+                    </div>
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 50%; background: var(--secondary);"></div>
+                        <span class="chart-bar-label">Technical</span>
+                    </div>
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 35%; background: var(--warning);"></div>
+                        <span class="chart-bar-label">Delivery</span>
+                    </div>
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 25%; background: var(--success);"></div>
+                        <span class="chart-bar-label">Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Urgent SLA Alert Box -->
+            <div class="card" style="border-left: 4px solid var(--danger);">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-bell text-danger"></i> AI SLA Breach Warnings</h3>
+                    <span class="badge badge-high">2 Imminent Breaches</span>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-badge-dot" style="background: var(--danger);"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">TICK-9082: Unauthorized recurring charge of $49.99</div>
+                            <div class="activity-desc">Customer Sentiment: Negative (18%) | SLA Deadline in 2 hrs</div>
+                        </div>
+                        <a href="/frontend/agent/complaint-details.html?id=TICK-9082" class="btn btn-sm btn-danger">Resolve Now</a>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-badge-dot" style="background: var(--warning);"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">TICK-9083: API Gateway HTTP 500 Webhook Errors</div>
+                            <div class="activity-desc">Technical Priority High | SLA Deadline in 4 hrs</div>
+                        </div>
+                        <a href="/frontend/agent/complaint-details.html?id=TICK-9083" class="btn btn-sm btn-secondary">Open Ticket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Priority & Pending Ticket Queue Table -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-fire text-danger"></i> Immediate Attention Queue</h2>
+                <a href="/frontend/agent/complaints.html" class="btn btn-sm btn-secondary">Full Queue</a>
+            </div>
+            <div class="table-container">
+                <table class="complaint-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Customer</th>
+                            <th>Subject</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Sentiment</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agentUrgentTable">
+                        <!-- Loaded dynamically by agent.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Support Agent Workbench</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/agent.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('agent');
+        });
+    </script>
+</body>
+</html>

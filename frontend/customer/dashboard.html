@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - ResolverAI</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/customer/dashboard.html" class="nav-link active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="/frontend/customer/create-complaint.html" class="nav-link"><i class="fas fa-plus-circle"></i> File Complaint</a></li>
+            <li><a href="/frontend/customer/complaints.html" class="nav-link"><i class="fas fa-list-ul"></i> My Tickets</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>Customer Support Dashboard</h1>
+                <p>Track your submitted tickets, AI resolution status, and compensation payouts.</p>
+            </div>
+            <a href="/frontend/customer/create-complaint.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-paper-plane"></i> Submit New Ticket
+            </a>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="fas fa-ticket-alt"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statTotalComplaints">0</span>
+                    <span class="stat-label">Total Tickets Logged</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning"><i class="fas fa-hourglass-half"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statPendingComplaints">0</span>
+                    <span class="stat-label">Under Agent Review</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statResolvedComplaints">0</span>
+                    <span class="stat-label">Resolved Tickets</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="fas fa-coins"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statRefundsCount">0</span>
+                    <span class="stat-label">Refunds & Credits</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner for Quick Submission -->
+        <section class="action-banner">
+            <div class="action-banner-text">
+                <h2>Experiencing an issue with your billing, delivery, or service?</h2>
+                <p>Our real-time AI assistant will automatically analyze your issue and provide immediate suggestions.</p>
+            </div>
+            <a href="/frontend/customer/create-complaint.html" class="btn btn-primary">
+                File Ticket Now
+            </a>
+        </section>
+
+        <!-- Recent Complaints Table -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-history text-primary"></i> Recent Tickets</h2>
+                <a href="/frontend/customer/complaints.html" class="btn btn-sm btn-secondary">View All Tickets</a>
+            </div>
+            <div class="table-container">
+                <table class="complaint-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Subject</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerRecentTable">
+                        <!-- Loaded dynamically via customer.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Customer Portal</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/customer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('customer');
+        });
+    </script>
+</body>
+</html>

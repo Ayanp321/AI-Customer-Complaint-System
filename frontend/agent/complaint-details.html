@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Workbench - ResolverAI Admin</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <link rel="stylesheet" href="/frontend/css/complaint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/frontend/index.html" class="nav-brand">
+            <div class="brand-logo"><i class="fas fa-brain"></i></div>
+            <span>ResolverAI Admin</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/frontend/agent/dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Command Center</a></li>
+            <li><a href="/frontend/agent/complaints.html" class="nav-link active"><i class="fas fa-tasks"></i> Support Queue</a></li>
+        </ul>
+        <div id="userProfileNav"></div>
+    </nav>
+
+    <main class="container">
+        <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/frontend/agent/complaints.html" class="btn btn-sm btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Support Queue
+            </a>
+            <div style="display: flex; gap: 0.75rem;">
+                <button type="button" id="btnApproveRefund" class="btn btn-sm btn-success">
+                    <i class="fas fa-hand-holding-usd"></i> Approve Compensation Refund
+                </button>
+                <button type="button" id="btnMarkResolved" class="btn btn-sm btn-primary">
+                    <i class="fas fa-check-circle"></i> Mark Ticket Resolved
+                </button>
+            </div>
+        </div>
+
+        <div class="ticket-detail-grid">
+            <!-- Main Column: Chat History & AI Reply Workbench -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span id="wbTicketId" class="ticket-id" style="font-size: 1.1rem;">TICK-XXXX</span>
+                        <h2 id="wbSubject" style="font-size: 1.25rem; font-weight: 700; margin-top: 0.25rem;">Complaint Subject Title</h2>
+                    </div>
+                    <span id="wbStatusBadge" class="badge badge-pending">Pending</span>
+                </div>
+
+                <!-- Chat History -->
+                <div id="agentChatMessages" class="chat-history">
+                    <!-- Rendered by agent.js -->
+                </div>
+
+                <!-- Agent Message Composer with AI Smart Auto-Reply Generator -->
+                <form id="agentReplyForm" style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Reply to Customer</span>
+                        <button type="button" id="btnAiDraftReply" class="btn btn-sm btn-secondary" style="color: var(--accent); border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.1);">
+                            <i class="fas fa-wand-magic-sparkles"></i> AI Draft Smart Response
+                        </button>
+                    </div>
+
+                    <textarea id="agentReplyInput" class="form-control" style="min-height: 120px; margin-bottom: 0.75rem;" placeholder="Type agent message or click 'AI Draft Smart Response' above..." required></textarea>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Reply to Customer
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: Ticket Metadata & Customer Sentiment Analysis -->
+            <div>
+                <!-- Customer Info Card -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 class="card-title" style="font-size: 1rem; margin-bottom: 1rem;"><i class="fas fa-user-circle text-primary"></i> Customer Profile</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;">
+                        <div class="flex-between">
+                            <span class="text-muted">Name</span>
+                            <strong id="wbCustomerName">--</strong>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">Email</span>
+                            <span id="wbCustomerEmail" class="text-subtle" style="font-size: 0.8rem;">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Sentiment & Priority Card -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 class="card-title" style="font-size: 1rem; margin-bottom: 1rem;"><i class="fas fa-brain text-accent"></i> AI Intelligence Triage</h3>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem;">
+                        <div class="flex-between">
+                            <span class="text-muted">Category</span>
+                            <span id="wbCategory" class="badge" style="background: var(--bg-surface);">--</span>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">Urgency Score</span>
+                            <span id="wbPriorityBadge" class="badge badge-high">--</span>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">Customer Sentiment</span>
+                            <span id="wbSentimentPill" class="sentiment-pill sentiment-negative">--</span>
+                        </div>
+                        <div class="flex-between">
+                            <span class="text-muted">SLA Deadline</span>
+                            <span id="wbSlaDeadline" style="font-size: 0.8rem; color: var(--warning); font-weight: 700;">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ResolverAI System - Support Agent Workbench</p>
+    </footer>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/agent.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.auth.requireRole('agent');
+        });
+    </script>
+</body>
+</html>
